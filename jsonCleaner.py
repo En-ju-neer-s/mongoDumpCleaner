@@ -35,5 +35,5 @@ for file in os.listdir(directory):
         with open('./' + nameCleanedFoler + '/' + os.path.splitext(filename)[0] + 'Cleaned' + '.json', 'w') as json_file:
             json_file.write(cleanedStringJson)
     else:
-        print("NO JSON")
+        print("NOT JSON")
         continue

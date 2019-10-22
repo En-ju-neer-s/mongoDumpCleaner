@@ -32,7 +32,7 @@ for file in os.listdir(directory):
         if os.path.exists(nameCleanedFoler) == False:  # check if this folder exist other wise make one
             os.mkdir(nameCleanedFoler)
         # Write data to a will
-        with open('./' + nameCleanedFoler + '/' + os.path.splitext(filename)[0] + 'Cleaned' + '.json', 'w') as json_file:
+        with open('./' + nameCleanedFoler + '/' + os.path.splitext(filename)[0] + 'Cleaned.json', 'w') as json_file:
             json_file.write(cleanedStringJson)
     else:
         print("NOT JSON")

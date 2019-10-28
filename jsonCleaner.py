@@ -12,11 +12,12 @@ for file in os.listdir(directory):
     if filename.endswith(".json"):
         print(filename)  # see preogress
         # go to file name
-        with open('./' + directoryName + "/" + filename, "r") as data_in:
+        with open('./' + directoryName + "/" + filename, "r", encoding="utf8") as data_in:
 
             cleanedStringJson = ''  # starting string
             # REGEX
             for line in data_in:
+
                 cleanedBindata = re.sub(r'BinData\S\d\S\s(\S+)\)',
                                         r'\1',
                                         line)
@@ -28,6 +29,7 @@ for file in os.listdir(directory):
 
                 cleanedStringJson = cleanedStringJson + jsondataString
             print(len(cleanedStringJson))
+            # cleanedStringJson = cleanedStringJson + ']'
 
         if os.path.exists(nameCleanedFoler) == False:  # check if this folder exist other wise make one
             os.mkdir(nameCleanedFoler)

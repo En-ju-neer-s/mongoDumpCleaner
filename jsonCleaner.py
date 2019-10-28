@@ -2,8 +2,10 @@ import json
 import re
 import os
 
-directoryName = 'test'
+directoryName = 'data'
 nameCleanedFoler = 'cleanedJson'
+
+isArray = False
 
 directory = os.fsencode(directoryName)
 # loop through all the files
@@ -12,24 +14,47 @@ for file in os.listdir(directory):
     if filename.endswith(".json"):
         print(filename)  # see preogress
         # go to file name
-        with open('./' + directoryName + "/" + filename, "r") as data_in:
+        with open('./' + directoryName + "/" + filename, "r", encoding="utf8") as data_in:
 
             cleanedStringJson = ''  # starting string
+
             # REGEX
             for line in data_in:
-                cleanedBindata = re.sub(r'BinData\S\d\S\s(\S+)\)',
-                                        r'\1',
-                                        line)
+                # print(line)
+                newLine = ''  # starting string
 
-                # convert the TenGen JSON to Strict JSON
-                jsondataString = re.sub(r'\:\s*\S+\s*\(\s*(\S+)\s*\)',
-                                        r':\1',
-                                        cleanedBindata)
+                if '[' in line:
+                    isArray = True
 
-                cleanedStringJson = cleanedStringJson + jsondataString
+                if ']' in line:
+                    line = ''
+                    isArray = False
+
+                if isArray:
+                    newLine = ''
+
+                else:
+                    cleanedBindata = re.sub(r'BinData\S\d\S\s(\S+)\)',
+                                            r'\1',
+                                            line)
+
+                    # convert the TenGen JSON to Strict JSON
+                    jsondataString = re.sub(r'\:\s*\S+\s*\(\s*(\S+)\s*\)',
+                                            r':\1',
+                                            cleanedBindata)
+                    # remove any /r or /n breaks
+                    removeLinebreaks = re.sub(r'\\r\\n|\\r|\\n',
+                                              r'',
+                                              jsondataString)
+                    newLine = removeLinebreaks
+
+                cleanedStringJson = cleanedStringJson + newLine
+                print(cleanedStringJson)
+
             print(len(cleanedStringJson))
 
-        if os.path.exists(nameCleanedFoler) == False:  # check if this folder exist other wise make one
+        # check if this folder exist other wise make one
+        if os.path.exists(nameCleanedFoler) == False:
             os.mkdir(nameCleanedFoler)
         # Write data to a will
         with open('./' + nameCleanedFoler + '/' + os.path.splitext(filename)[0] + 'Cleaned.json', 'w') as json_file:

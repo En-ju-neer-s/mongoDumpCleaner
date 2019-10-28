@@ -2,7 +2,7 @@ import json
 import re
 import os
 
-directoryName = 'data'
+directoryName = 'test'
 nameCleanedFoler = 'cleanedJson'
 
 isArray = False
@@ -49,7 +49,7 @@ for file in os.listdir(directory):
                     newLine = removeLinebreaks
 
                 cleanedStringJson = cleanedStringJson + newLine
-                print(cleanedStringJson)
+                # print(cleanedStringJson)
 
             print(len(cleanedStringJson))
             # cleanedStringJson = cleanedStringJson + ']'

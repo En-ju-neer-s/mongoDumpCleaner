@@ -52,6 +52,7 @@ for file in os.listdir(directory):
                 print(cleanedStringJson)
 
             print(len(cleanedStringJson))
+            # cleanedStringJson = cleanedStringJson + ']'
 
         # check if this folder exist other wise make one
         if os.path.exists(nameCleanedFoler) == False:

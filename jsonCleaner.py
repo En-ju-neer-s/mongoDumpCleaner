@@ -15,12 +15,15 @@ for file in os.listdir(directory):
         print(filename)  # see preogress
         # go to file name
         with open('./' + directoryName + "/" + filename, "r", encoding="utf8") as data_in:
+            linesAmount = len(data_in.readlines())
+            print('Total: ', end="")
+            print(linesAmount)
 
+        with open('./' + directoryName + "/" + filename, "r", encoding="utf8") as data_in:
             cleanedStringJson = ''  # starting string
-
+            linesCount = 0
             # REGEX
             for line in data_in:
-                # print(line)
                 newLine = ''  # starting string
 
                 if '[' in line:
@@ -37,7 +40,6 @@ for file in os.listdir(directory):
                     cleanedBindata = re.sub(r'BinData\S\d\S\s(\S+)\)',
                                             r'\1',
                                             line)
-
                     # convert the TenGen JSON to Strict JSON
                     jsondataString = re.sub(r'\:\s*\S+\s*\(\s*(\S+)\s*\)',
                                             r':\1',
@@ -49,7 +51,11 @@ for file in os.listdir(directory):
                     newLine = removeLinebreaks
 
                 cleanedStringJson = cleanedStringJson + newLine
-                print(cleanedStringJson)
+
+                linesCount += 1
+                progres = (linesCount/linesAmount) * 100
+                print("Progres: "+str(round(progres))+"%  Lines: " +
+                      str(linesCount), end="\r", flush=True)
 
             print(len(cleanedStringJson))
             # cleanedStringJson = cleanedStringJson + ']'

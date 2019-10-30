@@ -2,7 +2,7 @@ import json
 import re
 import os
 
-directoryName = 'data'
+directoryName = 'test'
 nameCleanedFoler = 'cleanedJson'
 
 isArray = False

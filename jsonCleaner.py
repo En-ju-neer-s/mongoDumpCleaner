@@ -57,6 +57,11 @@ for file in os.listdir(directory):
                 print("Progres: "+str(round(progres))+"%  Lines: " +
                       str(linesCount), end="\r", flush=True)
 
+                # limit results to 500
+                # if (linesCount == 36000):
+                #     print('Done')
+                #     break
+
             print(len(cleanedStringJson))
             # cleanedStringJson = cleanedStringJson + ']'
 
@@ -64,7 +69,7 @@ for file in os.listdir(directory):
         if os.path.exists(nameCleanedFoler) == False:
             os.mkdir(nameCleanedFoler)
         # Write data to a will
-        with open('./' + nameCleanedFoler + '/' + os.path.splitext(filename)[0] + 'Cleaned.json', 'w') as json_file:
+        with open('./' + nameCleanedFoler + '/' + os.path.splitext(filename)[0] + 'Cleaned.json', 'w', encoding="utf8") as json_file:
             json_file.write(cleanedStringJson)
     else:
         print("NOT JSON")
